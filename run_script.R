@@ -2,6 +2,7 @@
 library(ggplot2)
 source("fit_nonlinear.R")
 source("predict_model_A.R")
+source("predict_model_B.R")
 source("plot_model.R")
 source("pipeline.R")
 
@@ -12,17 +13,21 @@ head(my_data)
 x <- my_data$x
 y <- my_data$y
 
-# set initial parameters
+# set initial parameters (Using the 6-parameter superset)
 start_par <-  data.frame(a = c(0.001), b=c(0.0001), c=c(0.1),A=c(0.1),B= c(0.1), freq=c(4.5), model_type=c("A") )
 
 
 
 # execute the code
-temp <- run_analysis(x,y,start_par)
-
-# visualize the data and the model
-print(temp$plot)
-
-#print out
-print(paste("model A integrated. BIC=",round(temp$bic,3) ," AIC=",round(temp$aic,3)))
+seq <- c("A", "B")
+for (v in seq)
+{
+  start_par[7] <- v
+  temp <- run_analysis(x,y,start_par)
+  # visualize the data and the model
+  print(temp$plot)
+  #print out
+  print(paste("model ",v, " BIC=",round(temp$bic,3) ,
+              " AIC=",round(temp$aic,3)))
+}
 
