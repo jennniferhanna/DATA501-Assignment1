@@ -4,6 +4,7 @@ source("fit_nonlinear.R")
 source("predict_model_A.R")
 source("predict_model_B.R")
 source("predict_model_C.R")
+source("predict_model_D.R")
 source("plot_model.R")
 source("pipeline.R")
 
@@ -14,13 +15,12 @@ head(my_data)
 x <- my_data$x
 y <- my_data$y
 
-# set initial parameters (Using the 6-parameter superset)
 start_par <-  data.frame(a = c(0.001), b=c(0.0001), c=c(0.1),A=c(0.1),B= c(0.1), freq=c(4.5), model_type=c("A") )
 
 
 
 # execute the code
-seq <- c("A", "B", "C")
+seq <- c("A", "B", "C", "D")
 for (v in seq)
 {
   start_par[7] <- v
@@ -31,5 +31,6 @@ for (v in seq)
   print(paste("model ",v, " BIC=",round(temp$bic,3) ,
               " AIC=",round(temp$aic,3)))
 }
+
 
 
