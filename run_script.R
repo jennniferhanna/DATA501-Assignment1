@@ -3,6 +3,7 @@ library(ggplot2)
 source("fit_nonlinear.R")
 source("predict_model_A.R")
 source("predict_model_B.R")
+source("predict_model_C.R")
 source("plot_model.R")
 source("pipeline.R")
 
@@ -19,7 +20,7 @@ start_par <-  data.frame(a = c(0.001), b=c(0.0001), c=c(0.1),A=c(0.1),B= c(0.1),
 
 
 # execute the code
-seq <- c("A", "B")
+seq <- c("A", "B", "C")
 for (v in seq)
 {
   start_par[7] <- v
@@ -30,4 +31,5 @@ for (v in seq)
   print(paste("model ",v, " BIC=",round(temp$bic,3) ,
               " AIC=",round(temp$aic,3)))
 }
+
 
